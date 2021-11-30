@@ -2,6 +2,8 @@ package codingdojo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // x turning left
@@ -12,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // parsing the input
 //     x plateau
 //     x rover position
-//     rover instructions
+//     x rover instructions
 // formatting the output
 // multiple rovers not crashing
 public class MarsTest {
@@ -97,6 +99,12 @@ public class MarsTest {
         assertThrows(IllegalArgumentException.class,
                 () -> Mars.parseRoverPosition(""),
                 "expected empty input exception, but it didn't");
+    }
+
+    @Test
+    void parse_rover_instructions() {
+        assertEquals(List.of(Instruction.L, Instruction.M, Instruction.L), Mars.parseInstructions("LML"));
+        assertEquals(List.of(Instruction.M, Instruction.R), Mars.parseInstructions("MR"));
     }
 
 }

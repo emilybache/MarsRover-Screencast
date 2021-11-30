@@ -1,6 +1,8 @@
 package codingdojo;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Mars {
     public static Compass left(Compass heading) {
@@ -48,5 +50,11 @@ public class Mars {
         } else {
             throw new IllegalArgumentException("expected rover position, instead found " + input);
         }
+    }
+
+    public static List<Instruction> parseInstructions(String input) {
+        return input.chars()
+                .mapToObj(c -> Instruction.valueOf(Character.toString(c)))
+                .collect(Collectors.toList());
     }
 }
