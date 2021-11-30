@@ -18,4 +18,11 @@ public record Coords(int x, int y) {
         }
         return new Coords(this.x + dx, this.y + dy);
     }
+
+    public boolean isBetween(Coords minExtent, Coords maxExtent) {
+        return this.x >= minExtent.x
+                && this.y >= minExtent.y
+                && this.x <= maxExtent.x
+                && this.y <= maxExtent.y;
+    }
 }

@@ -2,13 +2,13 @@ package codingdojo;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 // x turning left
 // x turning right
 // x moving north
 // x moving other directions
-// not falling off the plateau
+// x not falling off the plateau
 // parsing the input
 // formatting the output
 // multiple rovers not crashing
@@ -35,6 +35,25 @@ public class MarsTest {
         assertEquals(new Coords(1, 0), Mars.move(new Coords(0, 0), Compass.E));
         assertEquals(new Coords(0, 1), Mars.move(new Coords(1, 1), Compass.W));
         assertEquals(new Coords(1, 0), Mars.move(new Coords(1, 1), Compass.S));
+    }
+
+    @Test
+    void plateau_within_boundaries() {
+        var plateau = new Plateau(new Coords(5, 5));
+        assertTrue(plateau.isOk(new Coords(1, 1)));
+        assertTrue(plateau.isOk(new Coords(5, 5)));
+        assertTrue(plateau.isOk(new Coords(0, 0)));
+        assertTrue(plateau.isOk(new Coords(5, 0)));
+        assertTrue(plateau.isOk(new Coords(0, 5)));
+    }
+
+    @Test
+    void plateau_outside_boundaries() {
+        var plateau = new Plateau(new Coords(5, 5));
+        assertFalse(plateau.isOk(new Coords(-1, -1)));
+        assertFalse(plateau.isOk(new Coords(6, 6)));
+        assertFalse(plateau.isOk(new Coords(0, 6)));
+        assertFalse(plateau.isOk(new Coords(6, 0)));
     }
 
 }
