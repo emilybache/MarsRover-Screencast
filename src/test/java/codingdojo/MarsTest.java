@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 // x moving other directions
 // x not falling off the plateau
 // parsing the input
+//     x plateau
+//     rover position
+//     rover instructions
 // formatting the output
 // multiple rovers not crashing
 public class MarsTest {
@@ -54,6 +57,22 @@ public class MarsTest {
         assertFalse(plateau.isOk(new Coords(6, 6)));
         assertFalse(plateau.isOk(new Coords(0, 6)));
         assertFalse(plateau.isOk(new Coords(6, 0)));
+    }
+
+    @Test
+    void create_plateau_from_input() {
+        assertEquals(new Plateau(new Coords(5, 5)), Mars.parsePlateau("5 5"));
+        assertEquals(new Plateau(new Coords(4, 6)), Mars.parsePlateau("4 6"));
+    }
+
+    @Test
+    void create_plateau_illegal_input() {
+        assertThrows(IllegalArgumentException.class,
+                () -> Mars.parsePlateau("bad input"),
+                "expected bad input exception, but it didn't");
+        assertThrows(IllegalArgumentException.class,
+                () -> Mars.parsePlateau(""),
+                "expected empty input exception, but it didn't");
     }
 
 }

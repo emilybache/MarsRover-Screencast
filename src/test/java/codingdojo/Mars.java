@@ -26,4 +26,15 @@ public class Mars {
     public static Coords move(Coords currentPosition, Compass heading) {
         return currentPosition.move(heading);
     }
+
+    public static Plateau parsePlateau(String input) {
+        var fields = input.split(" ");
+        if (fields.length == 2) {
+            int maxX = Integer.parseInt(fields[0]);
+            int maxY = Integer.parseInt(fields[1]);
+            return new Plateau(new Coords(maxX, maxY));
+        } else {
+            throw new IllegalArgumentException("expected two integers, instead found " + input);
+        }
+    }
 }
