@@ -1,5 +1,6 @@
 package codingdojo;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 //     x plateau
 //     x rover position
 //     x rover instructions
+//     handling multi-line input and parsing it all
+// x moving the rover!
 // formatting the output
 // multiple rovers not crashing
 public class MarsTest {
@@ -105,6 +108,49 @@ public class MarsTest {
     void parse_rover_instructions() {
         assertEquals(List.of(Instruction.L, Instruction.M, Instruction.L), Mars.parseInstructions("LML"));
         assertEquals(List.of(Instruction.M, Instruction.R), Mars.parseInstructions("MR"));
+    }
+
+    @Test
+    void moving_the_rover() {
+       var instructions = List.of(Instruction.M, Instruction.R);
+       var rover = new Rover(new Coords(0, 0), Compass.N);
+       var plateau = new Plateau(new Coords(5, 5));
+       rover.move(plateau, instructions);
+       assertEquals(new Coords(0, 1), rover.getPosition());
+       assertEquals(Compass.E, rover.getHeading());
+    }
+
+    @Test
+    void moving_the_rover_without_falling_off() {
+        var instructions = List.of(Instruction.M);
+        var rover = new Rover(new Coords(1, 1), Compass.N);
+        var plateau = new Plateau(new Coords(1, 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> rover.move(plateau, instructions),
+                "should have thrown exception when it fell off the plateau");
+    }
+
+    @Test
+    void moving_and_parsing() {
+        var input = """
+5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM
+""";
+        var expectedOutput = """
+1 3 N
+5 1 E""";
+        var output = Mars.moveRovers(input);
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void format_output() {
+        var rover = new Rover(new Coords(1, 3), Compass.N);
+        var output = Mars.formatRoverPosition(rover);
+        assertEquals("1 3 N", output);
     }
 
 }

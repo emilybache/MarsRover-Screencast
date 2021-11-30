@@ -57,4 +57,24 @@ public class Mars {
                 .mapToObj(c -> Instruction.valueOf(Character.toString(c)))
                 .collect(Collectors.toList());
     }
+
+    public static String moveRovers(String input) {
+        var lines = input.split("\n");
+        var plateau = Mars.parsePlateau(lines[0]);
+
+        var rover1 = Mars.parseRoverPosition(lines[1]);
+        var rover1Instructions = Mars.parseInstructions(lines[2]);
+        rover1.move(plateau, rover1Instructions);
+
+        var rover2 = Mars.parseRoverPosition(lines[3]);
+        var rover2Instructions = Mars.parseInstructions(lines[4]);
+        rover2.move(plateau, rover2Instructions);
+
+        return String.join("\n", List.of(formatRoverPosition(rover1), formatRoverPosition(rover2)));
+    }
+
+    public static String formatRoverPosition(Rover rover) {
+        var coords = rover.getPosition();
+        return coords.x() + " " + coords.y() + " " + rover.getHeading();
+    }
 }
