@@ -37,4 +37,16 @@ public class Mars {
             throw new IllegalArgumentException("expected two integers, instead found " + input);
         }
     }
+
+    public static Rover parseRoverPosition(String input) {
+        var fields = input.split(" ");
+        if (fields.length == 3) {
+            int x = Integer.parseInt(fields[0]);
+            int y = Integer.parseInt(fields[1]);
+            var heading = Compass.valueOf(fields[2]);
+            return new Rover(new Coords(x, y), heading);
+        } else {
+            throw new IllegalArgumentException("expected rover position, instead found " + input);
+        }
+    }
 }

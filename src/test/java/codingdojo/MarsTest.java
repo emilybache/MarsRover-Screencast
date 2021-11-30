@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // x not falling off the plateau
 // parsing the input
 //     x plateau
-//     rover position
+//     x rover position
 //     rover instructions
 // formatting the output
 // multiple rovers not crashing
@@ -72,6 +72,30 @@ public class MarsTest {
                 "expected bad input exception, but it didn't");
         assertThrows(IllegalArgumentException.class,
                 () -> Mars.parsePlateau(""),
+                "expected empty input exception, but it didn't");
+    }
+
+    @Test
+    void create_rover() {
+        var rover = Mars.parseRoverPosition("1 2 N");
+        assertEquals(new Coords(1, 2), rover.getPosition());
+        assertEquals(Compass.N, rover.getHeading());
+    }
+
+    @Test
+    void create_second_rover() {
+        var rover = Mars.parseRoverPosition("3 3 E");
+        assertEquals(new Coords(3, 3), rover.getPosition());
+        assertEquals(Compass.E, rover.getHeading());
+    }
+
+    @Test
+    void create_rover_illegal_input() {
+        assertThrows(IllegalArgumentException.class,
+                () -> Mars.parseRoverPosition("bad input three"),
+                "expected bad input exception, but it didn't");
+        assertThrows(IllegalArgumentException.class,
+                () -> Mars.parseRoverPosition(""),
                 "expected empty input exception, but it didn't");
     }
 
