@@ -15,7 +15,7 @@ public class Mars {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String formatRoverPosition(Rover rover) {
+    static String formatRoverPosition(Rover rover) {
         var coords = rover.getPosition();
         return coords.x() + " " + coords.y() + " " + rover.getHeading();
     }
