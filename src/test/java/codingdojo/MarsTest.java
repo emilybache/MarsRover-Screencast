@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 //     x plateau
 //     x rover position
 //     x rover instructions
-//     handling multi-line input and parsing it all
+//     x handling multi-line input and parsing it all
 // x moving the rover!
-// formatting the output
+// x formatting the output
 // multiple rovers not crashing
 public class MarsTest {
     @Test
@@ -142,6 +142,25 @@ MMRMMRMRRM
         var expectedOutput = """
 1 3 N
 5 1 E""";
+        var output = Mars.moveRovers(input);
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void moving_and_parsing_with_three_rovers() {
+        var input = """
+5 5
+1 2 N
+LMLMLMLMM
+3 3 E
+MMRMMRMRRM
+2 3 W
+LM
+""";
+        var expectedOutput = """
+1 3 N
+5 1 E
+2 2 S""";
         var output = Mars.moveRovers(input);
         assertEquals(expectedOutput, output);
     }

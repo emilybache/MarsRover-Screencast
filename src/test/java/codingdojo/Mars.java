@@ -1,5 +1,6 @@
 package codingdojo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,15 +63,19 @@ public class Mars {
         var lines = input.split("\n");
         var plateau = Mars.parsePlateau(lines[0]);
 
-        var rover1 = Mars.parseRoverPosition(lines[1]);
-        var rover1Instructions = Mars.parseInstructions(lines[2]);
-        rover1.move(plateau, rover1Instructions);
+        var all_rovers = new ArrayList<Rover>();
+        int roverCount = (lines.length - 1)/2;
+        for (int i = 0; i < roverCount; i++) {
+            var rover = Mars.parseRoverPosition(lines[1 + i*2]);
+            var instructions = Mars.parseInstructions(lines[2 + i*2]);
+            rover.move(plateau, instructions);
+            all_rovers.add(rover);
+        }
 
-        var rover2 = Mars.parseRoverPosition(lines[3]);
-        var rover2Instructions = Mars.parseInstructions(lines[4]);
-        rover2.move(plateau, rover2Instructions);
-
-        return String.join("\n", List.of(formatRoverPosition(rover1), formatRoverPosition(rover2)));
+        List<String> roverPositions = all_rovers.stream()
+                .map(Mars::formatRoverPosition)
+                .collect(Collectors.toList());
+        return String.join("\n", roverPositions);
     }
 
     public static String formatRoverPosition(Rover rover) {
