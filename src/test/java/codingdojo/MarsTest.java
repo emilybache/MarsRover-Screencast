@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MarsTest {
     @Test
     void left_turn() {
-        assertEquals(Compass.W, Mars.left(Compass.N));
-        assertEquals(Compass.S, Mars.left(Compass.W));
-        assertEquals(Compass.E, Mars.left(Compass.S));
-        assertEquals(Compass.N, Mars.left(Compass.E));
+        assertEquals(Compass.W, Compass.left(Compass.N));
+        assertEquals(Compass.S, Compass.left(Compass.W));
+        assertEquals(Compass.E, Compass.left(Compass.S));
+        assertEquals(Compass.N, Compass.left(Compass.E));
     }
 
     @Test
     void right_turn() {
-        assertEquals(Compass.E, Mars.right(Compass.N));
-        assertEquals(Compass.N, Mars.right(Compass.W));
-        assertEquals(Compass.W, Mars.right(Compass.S));
-        assertEquals(Compass.S, Mars.right(Compass.E));
+        assertEquals(Compass.E, Compass.right(Compass.N));
+        assertEquals(Compass.N, Compass.right(Compass.W));
+        assertEquals(Compass.W, Compass.right(Compass.S));
+        assertEquals(Compass.S, Compass.right(Compass.E));
     }
 
     @Test

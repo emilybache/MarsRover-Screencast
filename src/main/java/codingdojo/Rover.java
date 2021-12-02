@@ -25,8 +25,8 @@ public class Rover {
         for (var instruction :
                 instructions) {
             switch (instruction) {
-                case L -> this.heading = Mars.left(this.heading);
-                case R -> this.heading = Mars.right(this.heading);
+                case L -> this.heading = Compass.left(this.heading);
+                case R -> this.heading = Compass.right(this.heading);
                 case M -> {
                     var newPosition = Mars.move(this.position, this.heading);
                     if (plateau.isOk(newPosition)) {
