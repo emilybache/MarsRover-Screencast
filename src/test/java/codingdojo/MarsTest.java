@@ -1,25 +1,11 @@
 package codingdojo;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// x turning left
-// x turning right
-// x moving north
-// x moving other directions
-// x not falling off the plateau
-// parsing the input
-//     x plateau
-//     x rover position
-//     x rover instructions
-//     x handling multi-line input and parsing it all
-// x moving the rover!
-// x formatting the output
-// multiple rovers not crashing
 public class MarsTest {
     @Test
     void left_turn() {
@@ -66,30 +52,30 @@ public class MarsTest {
 
     @Test
     void create_plateau_from_input() {
-        assertEquals(new Plateau(new Coords(5, 5)), Mars.parsePlateau("5 5"));
-        assertEquals(new Plateau(new Coords(4, 6)), Mars.parsePlateau("4 6"));
+        assertEquals(new Plateau(new Coords(5, 5)), MarsInputParser.parsePlateau("5 5"));
+        assertEquals(new Plateau(new Coords(4, 6)), MarsInputParser.parsePlateau("4 6"));
     }
 
     @Test
     void create_plateau_illegal_input() {
         assertThrows(IllegalArgumentException.class,
-                () -> Mars.parsePlateau("bad input"),
+                () -> MarsInputParser.parsePlateau("bad input"),
                 "expected bad input exception, but it didn't");
         assertThrows(IllegalArgumentException.class,
-                () -> Mars.parsePlateau(""),
+                () -> MarsInputParser.parsePlateau(""),
                 "expected empty input exception, but it didn't");
     }
 
     @Test
     void create_rover() {
-        var rover = Mars.parseRoverPosition("1 2 N");
+        var rover = MarsInputParser.parseRoverPosition("1 2 N");
         assertEquals(new Coords(1, 2), rover.getPosition());
         assertEquals(Compass.N, rover.getHeading());
     }
 
     @Test
     void create_second_rover() {
-        var rover = Mars.parseRoverPosition("3 3 E");
+        var rover = MarsInputParser.parseRoverPosition("3 3 E");
         assertEquals(new Coords(3, 3), rover.getPosition());
         assertEquals(Compass.E, rover.getHeading());
     }
@@ -97,17 +83,17 @@ public class MarsTest {
     @Test
     void create_rover_illegal_input() {
         assertThrows(IllegalArgumentException.class,
-                () -> Mars.parseRoverPosition("bad input three"),
+                () -> MarsInputParser.parseRoverPosition("bad input three"),
                 "expected bad input exception, but it didn't");
         assertThrows(IllegalArgumentException.class,
-                () -> Mars.parseRoverPosition(""),
+                () -> MarsInputParser.parseRoverPosition(""),
                 "expected empty input exception, but it didn't");
     }
 
     @Test
     void parse_rover_instructions() {
-        assertEquals(List.of(Instruction.L, Instruction.M, Instruction.L), Mars.parseInstructions("LML"));
-        assertEquals(List.of(Instruction.M, Instruction.R), Mars.parseInstructions("MR"));
+        assertEquals(List.of(Instruction.L, Instruction.M, Instruction.L), MarsInputParser.parseInstructions("LML"));
+        assertEquals(List.of(Instruction.M, Instruction.R), MarsInputParser.parseInstructions("MR"));
     }
 
     @Test
@@ -142,7 +128,7 @@ MMRMMRMRRM
         var expectedOutput = """
 1 3 N
 5 1 E""";
-        var output = Mars.moveRovers(input);
+        var output = Mars.deployRoverFleet(input);
         assertEquals(expectedOutput, output);
     }
 
@@ -161,7 +147,7 @@ LM
 1 3 N
 5 1 E
 2 2 S""";
-        var output = Mars.moveRovers(input);
+        var output = Mars.deployRoverFleet(input);
         assertEquals(expectedOutput, output);
     }
 
