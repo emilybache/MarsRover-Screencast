@@ -5,10 +5,6 @@ import java.util.stream.Collectors;
 
 public class Mars {
 
-    public static Coords move(Coords currentPosition, Compass heading) {
-        return currentPosition.move(heading);
-    }
-
     public static String deployRoverFleet(String input) {
         MarsRoverFleet fleet = MarsInputParser.parseRoverFleet(input);
 

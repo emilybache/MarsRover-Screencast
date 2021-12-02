@@ -25,10 +25,10 @@ public class MarsTest {
 
     @Test
     void moving() {
-        assertEquals(new Coords(0, 1), Mars.move(new Coords(0, 0), Compass.N));
-        assertEquals(new Coords(1, 0), Mars.move(new Coords(0, 0), Compass.E));
-        assertEquals(new Coords(0, 1), Mars.move(new Coords(1, 1), Compass.W));
-        assertEquals(new Coords(1, 0), Mars.move(new Coords(1, 1), Compass.S));
+        assertEquals(new Coords(0, 1), new Coords(0, 0).move(Compass.N));
+        assertEquals(new Coords(1, 0), new Coords(0, 0).move(Compass.E));
+        assertEquals(new Coords(0, 1), new Coords(1, 1).move(Compass.W));
+        assertEquals(new Coords(1, 0), new Coords(1, 1).move(Compass.S));
     }
 
     @Test

@@ -28,7 +28,7 @@ public class Rover {
                 case L -> this.heading = Compass.left(this.heading);
                 case R -> this.heading = Compass.right(this.heading);
                 case M -> {
-                    var newPosition = Mars.move(this.position, this.heading);
+                    var newPosition = this.position.move(this.heading);
                     if (plateau.isOk(newPosition)) {
                         if (noCrashing(newPosition, otherRovers)) {
                             this.position = newPosition;
