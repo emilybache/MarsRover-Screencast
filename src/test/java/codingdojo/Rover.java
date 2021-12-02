@@ -1,6 +1,7 @@
 package codingdojo;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Rover {
     private Coords position;
@@ -20,7 +21,7 @@ public class Rover {
         return heading;
     }
 
-    public void move(Plateau plateau, List<Instruction> instructions) {
+    public void move(Plateau plateau, List<Rover> otherRovers, List<Instruction> instructions) {
         for (var instruction :
                 instructions) {
             switch (instruction) {
@@ -29,13 +30,30 @@ public class Rover {
                 case M -> {
                     var newPosition = Mars.move(this.position, this.heading);
                     if (plateau.isOk(newPosition)) {
-                        this.position = newPosition;
+                        if (noCrashing(newPosition, otherRovers)) {
+                            this.position = newPosition;
+                        } else {
+                            throw new IllegalArgumentException("crashed into other rover!");
+                        }
                     } else {
                         throw new IllegalArgumentException("fallen off plateau!");
                     }
                 }
             }
         }
+    }
+
+    private boolean noCrashing(Coords newPosition, List<Rover> otherRovers) {
+        for (var rover:
+             otherRovers) {
+            if (rover == this) {
+                continue;
+            }
+            if (Objects.equals(newPosition, rover.getPosition())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -50,8 +68,8 @@ public class Rover {
         this.instructions = instructions;
     }
 
-    public Rover move(Plateau plateau) {
-        this.move(plateau, this.instructions);
+    public Rover move(Plateau plateau, List<Rover> otherRovers) {
+        this.move(plateau, otherRovers, this.instructions);
         return this;
     }
 }

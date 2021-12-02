@@ -73,7 +73,7 @@ public class Mars {
         }
 
         List<String> roverPositions = all_rovers.stream()
-                .map(rover -> rover.move(plateau))
+                .map(rover -> rover.move(plateau, all_rovers))
                 .map(Mars::formatRoverPosition)
                 .collect(Collectors.toList());
         return String.join("\n", roverPositions);

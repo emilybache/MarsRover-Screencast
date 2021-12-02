@@ -115,7 +115,7 @@ public class MarsTest {
        var instructions = List.of(Instruction.M, Instruction.R);
        var rover = new Rover(new Coords(0, 0), Compass.N);
        var plateau = new Plateau(new Coords(5, 5));
-       rover.move(plateau, instructions);
+       rover.move(plateau, List.of(), instructions);
        assertEquals(new Coords(0, 1), rover.getPosition());
        assertEquals(Compass.E, rover.getHeading());
     }
@@ -126,7 +126,7 @@ public class MarsTest {
         var rover = new Rover(new Coords(1, 1), Compass.N);
         var plateau = new Plateau(new Coords(1, 1));
         assertThrows(IllegalArgumentException.class,
-                () -> rover.move(plateau, instructions),
+                () -> rover.move(plateau, List.of(), instructions),
                 "should have thrown exception when it fell off the plateau");
     }
 
@@ -170,6 +170,19 @@ LM
         var rover = new Rover(new Coords(1, 3), Compass.N);
         var output = Mars.formatRoverPosition(rover);
         assertEquals("1 3 N", output);
+    }
+
+    @Test
+    void rovers_stop_instead_of_crashing() {
+        var rover1 = new Rover(new Coords(0, 0), Compass.N);
+        // 2nd rover is directly north of first rover
+        var rover2 = new Rover(new Coords(0, 1), Compass.N);
+
+        rover1.setInstructions(List.of(Instruction.M));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> rover1.move(new Plateau(new Coords(5,5)), List.of(rover2)),
+                "shouldn't have been able to move - would crash into rover2");
     }
 
 }
