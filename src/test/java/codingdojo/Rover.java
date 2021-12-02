@@ -5,6 +5,7 @@ import java.util.List;
 public class Rover {
     private Coords position;
     private Compass heading;
+    private List<Instruction> instructions;
 
     public Rover(Coords position, Compass heading) {
         this.position = position;
@@ -43,5 +44,14 @@ public class Rover {
                 "position=" + position +
                 ", heading=" + heading +
                 '}';
+    }
+
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
+    }
+
+    public Rover move(Plateau plateau) {
+        this.move(plateau, this.instructions);
+        return this;
     }
 }

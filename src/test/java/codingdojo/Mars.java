@@ -68,11 +68,12 @@ public class Mars {
         for (int i = 0; i < roverCount; i++) {
             var rover = Mars.parseRoverPosition(lines[1 + i*2]);
             var instructions = Mars.parseInstructions(lines[2 + i*2]);
-            rover.move(plateau, instructions);
+            rover.setInstructions(instructions);
             all_rovers.add(rover);
         }
 
         List<String> roverPositions = all_rovers.stream()
+                .map(rover -> rover.move(plateau))
                 .map(Mars::formatRoverPosition)
                 .collect(Collectors.toList());
         return String.join("\n", roverPositions);
