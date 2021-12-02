@@ -1,6 +1,6 @@
 package codingdojo;
 
-public record Coords(int x, int y) {
+record Coords(int x, int y) {
 
     public Coords move(Compass heading) {
         int dx = 0;

@@ -2,7 +2,7 @@ package codingdojo;
 
 import java.util.Map;
 
-public enum Compass {
+enum Compass {
     N, S, E, W;
 
     public static Compass left(Compass heading) {

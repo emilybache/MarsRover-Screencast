@@ -3,7 +3,7 @@ package codingdojo;
 import java.util.List;
 import java.util.Objects;
 
-public class Rover {
+class Rover {
     private Coords position;
     private Compass heading;
     private List<Instruction> instructions;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MarsRoverFleet {
+class MarsRoverFleet {
     private final Plateau plateau;
     private final ArrayList<Rover> all_rovers;
 

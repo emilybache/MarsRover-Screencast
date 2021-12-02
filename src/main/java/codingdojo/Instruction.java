@@ -1,5 +1,5 @@
 package codingdojo;
 
-public enum Instruction {
+enum Instruction {
     M, R, L
 }

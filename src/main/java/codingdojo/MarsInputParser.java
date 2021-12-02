@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MarsInputParser {
+class MarsInputParser {
     public static MarsRoverFleet parseRoverFleet(String input) {
         var lines = input.split("\n");
         var plateau = parsePlateau(lines[0]);
